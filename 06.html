@@ -36,9 +36,21 @@
                 <option value="3">3</option>
             </select><br><br>
 
-            <a href="second.html">commander</a>
+             <button onclick="verifierEtCommander()">Commander</button>
         </div>
         <div style="clear: both;"></div>
     </div>
+    
+    <script>
+        function verifierEtCommander() {
+            const doree = document.getElementById("doree").checked;
+            const argentee = document.getElementById("argentee").checked;
 
-   
+            if (doree || argentee) {
+               
+                window.location.href = "second.html";
+            } else {
+                alert("choose a color.")
+            }
+        }
+    </script>
