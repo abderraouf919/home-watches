@@ -40,16 +40,15 @@
         <div style="clear: both;"></div>
     </div>
     
-    <script>
+ <script>
         function verifierEtCommander() {
             const doree = document.getElementById("doree").checked;
             const argentee = document.getElementById("argentee").checked;
 
-            if (doree || argentee) {
-               
-                window.location.href = "second.html";
+            if ((doree && argentee) || (!doree && !argentee)) {
+                alert("Veuillez sélectionner une seule couleur.");
             } else {
-                alert("choose a color.")
+                window.location.href = "second.html";
             }
         }
     </script>
