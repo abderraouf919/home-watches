@@ -1,35 +1,49 @@
 <?php
+// Database connection parameters
 $servername = "localhost";
-$username = "root";
-$password = ""; // إذا كنت تستخدم XAMPP، اتركها فارغة
+$username = "your_username"; // Replace with your database username
+$password = "your_password"; // Replace with your database password
 $dbname = "client";
 
-// إنشاء الاتصال
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// التحقق من الاتصال
+// Check connection
 if ($conn->connect_error) {
-    die("Échec de la connexion : " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// استلام البيانات من النموذج
-$email = $_POST['email'];
-$motdepasse = $_POST['password'];
-
-// حماية ضد إدخال برمجي
-$email = $conn->real_escape_string($email);
-$motdepasse = $conn->real_escape_string($motdepasse);
-
-// إدخال البيانات في قاعدة البيانات
-$sql = "INSERT INTO login (Gmail, password) VALUES ('$email', '$motdepasse')";
-
-if ($conn->query($sql) === TRUE) {
-    // إعادة التوجيه عند النجاح
-    header("Location: quatrieme.html");
-    exit();
-} else {
-    echo "Erreur lors de l'enregistrement: " . $conn->error;
+// Process form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    // Validate data (you can add more validation as needed)
+    if (empty($email) || empty($password)) {
+        die("Email and password are required.");
+    }
+    
+    // Hash the password for security (recommended)
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Prepare SQL statement to prevent SQL injection
+    $stmt = $conn->prepare("INSERT INTO login (Gmail, password) VALUES (?, ?)");
+    $stmt->bind_param("ss", $email, $hashed_password);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        // Redirect to success page
+        header("Location: quatrieme.html");
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+    
+    // Close statement
+    $stmt->close();
 }
 
+// Close connection
 $conn->close();
 ?>
