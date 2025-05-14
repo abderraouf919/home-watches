@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creer un compte</title>
+</head>
+<body style="background-color: #F5F5DC; color: #A52A2A ;">
+    <form id="compteForm" action="creer_compte.php" method="POST">
+
+    <h1 style="text-align: center;">Creer un compte</h1>
+
+    <div style="width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #c0c0c0;">
+        <form id="compteForm">
+            <label for="nom">Nom:</label><br>
+            <input type="text" id="nom" name="nom" style="width: 380px;"><br><br>
+
+            <label for="prenom">Prenom:</label><br>
+            <input type="text" id="prenom" name="prenom" style="width: 380px;"><br><br>
+
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="age" style="width: 380px;"><br><br>
+
+            <label for="wilaya">Wilaya:</label><br>
+            <select id="wilaya" name="wilaya" style="width: 380px;">
+                <option value="Adrar">Adrar</option>
+                <option value="Chlef">Chlef</option>
+                <option value="Laghouat">Laghouat</option>
+                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+                <option value="Batna">Batna</option>
+                <option value="Bejaia">Bejaia</option>
+                <option value="Biskra">Biskra</option>
+                <option value="Bechar">Bechar</option>
+                <option value="Blida">Blida</option>
+                <option value="Bouira">Bouira</option>
+                <option value="Tamanrasset">Tamanrasset</option>
+                <option value="Tebessa">Tebessa</option>
+                <option value="Tlemcen">Tlemcen</option>
+                <option value="Tiaret">Tiaret</option>
+                <option value="Tizi Ouzou">Tizi Ouzou</option>
+                <option value="Alger">Alger</option>
+                <option value="Djelfa">Djelfa</option>
+                <option value="Jijel">Jijel</option>
+                <option value="Setif">Setif</option>
+                <option value="Saida">Saida</option>
+                <option value="Skikda">Skikda</option>
+                <option value="Sidi Bel Abbes">Sidi Bel Abbes</option>
+                <option value="Annaba">Annaba</option>
+                <option value="Guelma">Guelma</option>
+                <option value="Constantine">Constantine</option>
+                <option value="Medea">Medea</option>
+                <option value="Mostaganem">Mostaganem</option>
+                <option value="MSila">MSila</option>
+                <option value="Mascara">Mascara</option>
+                <option value="Ouargla">Ouargla</option>
+                <option value="Oran">Oran</option>
+                <option value="El Bayadh">El Bayadh</option>
+                <option value="Illizi">Illizi</option>
+                <option value="Bordj Bou Arreridj">Bordj Bou Arreridj</option>
+                <option value="Boumerdes">Boumerdes</option>
+                <option value="El Tarf">El Tarf</option>
+                <option value="Tindouf">Tindouf</option>
+                <option value="Tissemsilt">Tissemsilt</option>
+                <option value="El Oued">El Oued</option>
+                <option value="Khenchela">Khenchela</option>
+                <option value="Souk Ahras">Souk Ahras</option>
+                <option value="Tipaza">Tipaza</option>
+                <option value="Mila">Mila</option>
+                <option value="Ain Defla">Ain Defla</option>
+                <option value="Naama">Naama</option>
+                <option value="Ain Temouchent">Ain Temouchent</option>
+                <option value="Ghardaia">Ghardaia</option>
+                <option value="Relizane">Relizane</option>
+                <option value="Timimoun">Timimoun</option>
+                <option value="Bordj Baji Mokhtar">Bordj Baji Mokhtar</option>
+                <option value="Ouled Djellal">Ouled Djellal</option>
+                <option value="Beni Abbes">Beni Abbes</option>
+                <option value="In Salah">In Salah</option>
+                <option value="In Guezzam">In Guezzam</option>
+                <option value="Touggourt">Touggourt</option>
+                <option value="Djanet">Djanet</option>
+                <option value="El Mghair">El Mghair</option>
+                <option value="El Meniaa">El Meniaa</option>
+            </select><br><br>
+
+            <label for="telephone">Telephone:</label><br>
+            <input type="tel" id="telephone" name="telephone" style="width: 380px;"><br><br>
+
+            <label for="adresse">Adresse:</label><br>
+            <textarea id="adresse" name="adresse" style="width: 380px; height: 50px;"></textarea><br><br>
+
+            <label>Sexe:</label><br> 
+            <input type="radio" id="homme" name="sexe" value="homme">
+            <label for="homme">Homme</label>
+            <input type="radio" id="femme" name="sexe" value="femme">
+            <label for="femme">Femme</label><br><br>
+
+            <button type="submit">Envoyer</button>
+            <input type="reset" value="Effacer">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("compteForm").addEventListener("submit", function(e) {
+            e.preventDefault(); 
+
+            const nom = document.getElementById("nom").value.trim();
+            const prenom = document.getElementById("prenom").value.trim();
+            const age = parseInt(document.getElementById("age").value);
+            const telephone = document.getElementById("telephone").value.trim();
+            const adresse = document.getElementById("adresse").value.trim();
+            const sexeChecked = document.querySelector("input[name='sexe']:checked");
+
+            const phoneRegex = /^0(5|6|7)\d{8}$/;
+
+            if (nom.length < 2) {
+                alert("Le nom doit contenir au moins 2 lettres.");
+                return;
+            }
+
+            if (prenom.length < 2) {
+                alert("Le prenom doit contenir au moins 2 lettres.");
+                return;
+            }
+
+            if (isNaN(age) || age < 18 || age > 120) {
+                alert("L'age doit etre compris entre 18 et 120.");
+                return;
+            }
+
+            if (!phoneRegex.test(telephone)) {
+                alert("Le numero de telephone doit etre un numero algerien valide.");
+                return;
+            }
+
+            if (adresse.length < 5) {
+                alert("L'adresse doit contenir au moins 5 caracteres.");
+                return;
+            }
+
+            if (!sexeChecked) {
+                alert("Veuillez selectionner votre sexe.");
+                return;
+            }
+
+            alert("Formulaire soumis avec succes !");
+            
+            
+           
+            window.location.href = "cinquimeme.html";  
+
+        });
+    </script>
+</body>
+</html>

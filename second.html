@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>login</title>
+</head>
+<body style="background-color: #F5F5DC; color: #A52A2A;">
+    <h1 style="text-align: center;">Bienvenue</h1>
+
+    <div style="width: 300px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; text-align: center;">
+        <img src="88.jpg" alt="User Icon" style="width: 50px; height: 50px;"> 
+        <br><br>
+        <form id="loginForm">
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" style="width: 250px;" required><br><br>
+
+            <label for="password">Mot de passe:</label><br>
+            <input type="password" id="password" name="password" style="width: 250px;" required><br><br>
+
+            <label>
+                <input type="checkbox" id="terms">
+                J'accepte les <a href="#" style="color: #A52A2A;">conditions d'utilisation</a>
+            </label><br><br>
+
+            <div id="errorMsg" style="color: red;"></div>
+
+            
+
+            <input type="submit" value="Envoyer">
+            <input type="reset" value="Effacer">
+        </form>
+        <br>
+       
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMsg');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const termsAccepted = document.getElementById('terms').checked;
+
+            const passwordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^_-])[A-Za-z\d@$!%*#?&^_-]{9,}$/.test(password);
+
+            if (!termsAccepted) {
+                errorMsg.textContent = "Veuillez accepter les conditions d'utilisation.";
+            } else if (!passwordValid) {
+                errorMsg.textContent = "Le mot de passe doit contenir au moins 9 caractères, y compris lettres, chiffres et symboles.";
+            } else {
+                errorMsg.textContent = "";
+                
+                window.location.href = "quatrieme.html"; 
+            }
+        });
+    </script>
+</body>
+</html>
